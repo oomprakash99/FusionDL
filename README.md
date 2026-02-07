@@ -37,6 +37,27 @@
 除非您自己乐意并且有能力尝试新的环境，否则，Windows用户请新建一个Ubuntu24的WSL，Mac用户请从[orbstack](https://orbstack.dev/)安装一个虚拟机。
 
 ### 前置要求
+
+安装Node.js
+
+```bash
+# Download and install nvm:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+# in lieu of restarting the shell
+\. "$HOME/.nvm/nvm.sh"
+
+# Download and install Node.js:
+nvm install 24
+
+# Verify the Node.js version:
+node -v # Should print "v24.13.0".
+
+# Verify npm version:
+npm -v # Should print "11.6.2".
+
+```
+
 确保你的系统已安装 yt-dlp：
 
 ```bash

@@ -56,6 +56,49 @@ export default function DownloadList() {
     }
   };
 
+  const handleDownload = async (id: number, title?: string) => {
+    try {
+      const response = await fetch(`/api/downloads/${id}/file`);
+      
+      // 检查响应状态
+      if (!response.ok) {
+        const data = await response.json();
+        alert(data.error || '下载失败');
+        return;
+      }
+
+      // 获取文件blob
+      const blob = await response.blob();
+      
+      // 从响应头获取文件名
+      const contentDisposition = response.headers.get('Content-Disposition');
+      let fileName = title || 'video';
+      
+      if (contentDisposition) {
+        const fileNameMatch = contentDisposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+        if (fileNameMatch && fileNameMatch[1]) {
+          fileName = decodeURIComponent(fileNameMatch[1].replace(/['"]/g, ''));
+        }
+      }
+
+      // 创建下载链接
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.style.display = 'none';
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      
+      // 清理
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error('Failed to download file:', error);
+      alert('下载失败，请稍后重试');
+    }
+  };
+
   const formatFileSize = (bytes?: number) => {
     if (!bytes) return '未知';
     const mb = bytes / (1024 * 1024);
@@ -211,16 +254,15 @@ export default function DownloadList() {
 
                 <div className="flex flex-col gap-2 flex-shrink-0">
                   {download.status === 'completed' && download.file_path && (
-                    <a
-                      href={`/api/downloads/${download.id}/file`}
-                      download
+                    <button
+                      onClick={() => handleDownload(download.id, download.title)}
                       className="inline-flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg hover:from-blue-600 hover:to-blue-700 active:scale-95 transition-all duration-200 shadow-md hover:shadow-lg text-xs sm:text-sm whitespace-nowrap"
                     >
                       <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                       </svg>
                       <span>保存</span>
-                    </a>
+                    </button>
                   )}
                   <button
                     onClick={() => handleDelete(download.id)}
